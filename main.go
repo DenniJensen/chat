@@ -53,7 +53,7 @@ func main() {
 		facebook.New("key", "secret",
 			"http://localhost:8080/auth/callback/facebook"),
 	)
-	r := newRoom()
+	r := newRoom(UseAuthAvatar)
 	r.tracer = trace.New(os.Stdout)
 
 	http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
