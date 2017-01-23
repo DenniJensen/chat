@@ -1,6 +1,12 @@
 package main
 
-import "errors"
+import (
+	"crypto/md5"
+	"errors"
+	"fmt"
+	"io"
+	"strings"
+)
 
 var ErrNoAvatarURL = errors.New("chat: Unabel to get an vatar URL.")
 
@@ -18,5 +24,21 @@ func (AuthAvatar) GetAvatarURL(c *client) (string, error) {
 			return urlStr, nil
 		}
 	}
+	return "", ErrNoAvatarURL
+}
+
+type GravatarAvatar struct{}
+
+var UseGravatar GravatarAvatar
+
+func (GravatarAvatar) GetAvatarURL(c *client) (string, error) {
+	if email, ok := c.userData["email"]; ok {
+		if emailStr, ok := email.(string); ok {
+			m := md5.New()
+			io.WriteString(m, strings.ToLower(emailStr))
+			return fmt.Sprintf("//www.gravatar.com/avatar/%x", m.Sum(nil)), nil
+		}
+	}
+
 	return "", ErrNoAvatarURL
 }
