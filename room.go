@@ -1,10 +1,10 @@
 package main
 
 import (
-	"chat/trace"
 	"log"
 	"net/http"
 
+	"github.com/dennijensen/chat/trace"
 	"github.com/gorilla/websocket"
 	"github.com/stretchr/objx"
 )

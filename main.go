@@ -1,7 +1,6 @@
 package main
 
 import (
-	"chat/trace"
 	"flag"
 	"fmt"
 	"html/template"
@@ -10,6 +9,8 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+
+	"github.com/dennijensen/chat/trace"
 
 	"github.com/stretchr/gomniauth"
 	"github.com/stretchr/gomniauth/providers/facebook"
